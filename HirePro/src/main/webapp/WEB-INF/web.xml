@@ -3,7 +3,7 @@
   <display-name>HirePro</display-name>
   <servlet>
     <servlet-name>RecruiterServlet</servlet-name>
-    <servlet-class>RecruiterServlet</servlet-class>
+    <servlet-class>com.ideas2it.headHunt.servlet.RecruiterServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RecruiterServlet</servlet-name>
@@ -35,7 +35,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>ApplicantServlet</servlet-name>
-    <servlet-class>ApplicantServlet</servlet-class>
+    <servlet-class>com.ideas2it.headHunt.servlet.ApplicantServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ApplicantServlet</servlet-name>
@@ -64,12 +64,12 @@
   
   <error-page>
   	<error-code>404</error-code>
-  	<location>/error_404.jsp</location>
+  	<location>error_404.jsp</location>
   </error-page>
   
   <error-page>
   	<error-code>500</error-code>
-  	<location>/error_ex.jsp</location>
+  	<location>error_ex.jsp</location>
   </error-page>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

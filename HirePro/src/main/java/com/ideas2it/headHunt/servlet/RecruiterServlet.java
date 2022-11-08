@@ -1,3 +1,5 @@
+package com.ideas2it.headHunt.servlet;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -6,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
-import org.eclipse.jdt.internal.compiler.ast.ArrayQualifiedTypeReference;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
