@@ -3,7 +3,6 @@ package com.ideas2it.hirepro.dao;
 import java.util.List;
 
 import com.ideas2it.hirepro.customException.RecruitmentException;
-import com.ideas2it.hirepro.model.Applicant;
 import com.ideas2it.hirepro.model.Recruiter;
 /*
  * Recruiter Dao interface for headHunt Application 
@@ -21,7 +20,11 @@ public interface RecruiterDao {
      * @param recruiter of type Recruiter.
      * @return recruiter.
      */
-    public Integer createRecruiter(Recruiter recruiter) throws RecruitmentException;
+    void createRecruiter(Recruiter recruiter) throws RecruitmentException;
 
-    public List<Recruiter> getRecruiters() throws RecruitmentException;
+    Recruiter getRecruiter(int recruiterId) throws RecruitmentException;
+
+    List<Recruiter> getRecruiters() throws RecruitmentException;
+
+    void deleteRecruiter(int recruiterId) throws RecruitmentException;
 }

@@ -6,37 +6,39 @@ import org.apache.logging.log4j.LogManager;
 
 import com.ideas2it.hirepro.constants.Constants;
 public class CustomLogger {
-    private Logger logger;
+    private static Logger logger;
  
     public CustomLogger(Class<?> className) {
         logger = LogManager.getLogger(className);
     }
         
-    public void info(String message) {
-        logger.info(message);
+    public static void info(String message) {
+        //logger.info(message);
+        logger.info("apple");
     }
 
-    public void trace(String message) {
+    public static void trace(String message) {
         logger.trace(message);
     }
 
-    public void debug(String message) {
+    public static void debug(String message) {
         logger.debug(message);
     }
 
-    public void warn(String message) {
+    public static void warn(String message) {
         logger.warn(message);
     }
 
-    public void fatal(String message) {
+    public static void fatal(String message) {
         logger.fatal(message);// use codes here also 
     }
 
-    public void error(String message) {
-        logger.error(Constants.getErrorCode().get(message));
+    public static void error(String message) {
+        logger.error(message);
+        //logger.error(Constants.getErrorCode().get(message));
     }
 
-    public void error(String message, Throwable info) {
+    public static void error(String message, Throwable info) {
         logger.error(message, info);
     }
 }
