@@ -12,6 +12,7 @@
 <html>
 <head>
   <%@include file="base.jsp"%>
+  <title><c:out value="${title}">Update</c:out> </title>
 
 </head>
 <body>
@@ -24,6 +25,13 @@
 
     <form action="${pageContext.request.contextPath}/handle-Recruiter"  method="post">
 
+      <div class="form-group">
+        <input type="number"
+               class="form-control"
+               name="recruiterId"
+               placeholder="Enter the Recruiter Id here"
+               value="${recruiter.recruiterId}">
+      </div>
       <div class="form-group">
         <input type="text"
                class="form-control"
@@ -54,15 +62,28 @@
       </div>
 
       <div class="form-group">
-
+        <c:if test="${recruiter.gender eq 'MALE'}">
         Gender: <input name="tempGender"
                        type="radio"
-                       value="${recruiter.gender}">Male
-        </input>
-        <input name="tempGender"
-               type="radio"
-               value="${recruiter.gender}">Female
-        </input>
+                       value="MALE"
+                        checked="checked">Male
+                </input>
+                <input name="tempGender"
+                       type="radio"
+                       value="FEMALE">Female
+                </input>
+        </c:if>
+        <c:if test="${recruiter.gender eq 'FEMALE'}">
+          Gender: <input name="tempGender"
+                         type="radio"
+                         value="MALE">Male
+          </input>
+          <input name="tempGender"
+                 type="radio"
+                 value="FEMALE"
+                 checked="checked">Female
+          </input>
+        </c:if>
       </div>
       <div class="form-group">
         <input name="experience"

@@ -10,6 +10,7 @@ public class RecruiterDto {
 	
 	public static Recruiter getRecruiterDao(RecruiterDTO recruiterDto) {
 		Recruiter recruiter = new Recruiter();
+		recruiter.setRecruiterId(recruiterDto.getRecruiterId());
 		recruiter.setName(recruiterDto.getName());
 		recruiter.setEmail(recruiterDto.getEmail());
 		recruiter.setContactNumber(recruiterDto.getContactNumber());
@@ -32,25 +33,17 @@ public class RecruiterDto {
 			recruiterDto.setDateOfBirth(recruiter.getDateOfBirth());
 			recruiterDto.setExperience(recruiter.getExperience());
 			recruiterDto.setGender(recruiter.getGender());
-			recruiterDto.setApplicants(recruiter.getApplicants());
+			//recruiterDto.setApplicants(recruiter.getApplicants());
 		}
 		return recruiterDto;		
 	}
 
 	public static List<RecruiterDTO> getRecruiterList(List<Recruiter> recruiters) {
-		List<RecruiterDTO> recruiterDtoList = new ArrayList<RecruiterDTO>();
+		List<RecruiterDTO> recruiterDtoList = new ArrayList<>();
 		
 		if(null!=recruiters) {
 			for (Recruiter recruiter : recruiters) {
-				RecruiterDTO recruiterDto = new RecruiterDTO();
-				recruiterDto.setRecruiterId(recruiter.getRecruiterId());
-				recruiterDto.setName(recruiter.getName());
-				recruiterDto.setEmail(recruiter.getEmail());
-				recruiterDto.setContactNumber(recruiter.getContactNumber());
-				recruiterDto.setDateOfBirth(recruiter.getDateOfBirth());
-				recruiterDto.setExperience(recruiter.getExperience());
-				recruiterDto.setGender(recruiter.getGender());
-				recruiterDtoList.add(recruiterDto);
+				recruiterDtoList.add(getRecruiterDTO(recruiter));
 			}
 		}
 		return recruiterDtoList;

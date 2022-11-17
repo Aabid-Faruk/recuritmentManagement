@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
@@ -21,7 +22,6 @@ import java.util.List;
 /**
  * Controller class for headHunt Application
  *
- *
  * @author  Aabid Farooq
  * @version 18.0.2
  *
@@ -31,16 +31,14 @@ public class RecruiterController {
     @Autowired
     private RecruiterService recruiterService;
 
-    private CustomLogger customLogger;
-
     @RequestMapping("/")
     public String homePage(Model model) {
         try {
-            List<RecruiterDTO> recruiters = (List<RecruiterDTO>) recruiterService.getRecruiters();
+            List<RecruiterDTO> recruiters = recruiterService.viewRecruiters();
             System.out.println(recruiters);
             model.addAttribute("recruiters", recruiters);
         } catch (RecruitmentException exception) {
-            customLogger.error(exception.getMessage());
+            CustomLogger.error("ERROR_101");
         }
         return "index";
     }
@@ -67,14 +65,43 @@ public class RecruiterController {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             recruiter.setDateOfBirth(simpleDateFormat.parse(request.getParameter("tempDob")));
             recruiter.setGender(Gender.valueOf(request.getParameter("tempGender")));
-            Integer id = recruiterService.createRecruiter(recruiter);
-           System.out.println(id);
-            redirectView.setUrl(request.getContextPath() + "/index");
+            recruiterService.createRecruiter(recruiter);
+            redirectView.setUrl(request.getContextPath() + "/");
         } catch (RecruitmentException exception) {
-            customLogger.error(exception.getMessage());
+            CustomLogger.error("ERROR_102");
         } catch (ParseException exception) {
-            customLogger.error(exception.getMessage());
+            CustomLogger.error("ERROR_103");
         }
         return redirectView;
+    }
+
+    //delete handler
+
+    @RequestMapping("/deleteRecruiter/{recruiterId}")
+    public RedirectView deleteRecruiter(@PathVariable("recruiterId") int recruiterId, HttpServletRequest request) {
+        RedirectView redirectView = new RedirectView();
+        try{
+            recruiterService.deleteRecruiter(recruiterId);
+            redirectView.setUrl(request.getContextPath() + "/");
+        } catch (RecruitmentException exception) {
+            CustomLogger.error("ERROR_104");
+        }
+        return redirectView;
+    }
+
+    //update handler
+
+    @RequestMapping("updateRecruiter/{recruiterId}")
+    public String updateRecruiter(@PathVariable("recruiterId") int recruiterId, Model model) {
+        System.out.println(recruiterId);
+        try {
+            //Recruiter recruiter = recruiterService.viewRecruiter(recruiterId);
+            RecruiterDTO recruiter = recruiterService.viewRecruiter(recruiterId);
+            model.addAttribute("recruiter", recruiter);
+            model.addAttribute("title", "UpdateRecruiter");
+        } catch (RecruitmentException exception) {
+            //CustomLogger.info(exception.getMessage() + "abc");
+        }
+        return "updateRecruiter";
     }
 }

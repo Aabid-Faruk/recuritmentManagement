@@ -25,11 +25,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.ideas2it.hirepro.model.Applicant;
 import com.ideas2it.hirepro.constants.Gender;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.ResultCheckStyle;
+import org.hibernate.annotations.SQLDelete;
 
 @Entity
+@SQLDelete(sql = "Update recruiter SET is_deleted = '1' where recruiterId=?", check = ResultCheckStyle.COUNT)
 public class Recruiter { 
 	
 	@Id
@@ -49,7 +51,19 @@ public class Recruiter {
     
     @Enumerated(EnumType.STRING)
     private Gender gender;  
-    private int experience;  
+    private int experience;
+
+    public int getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    @ColumnDefault("0")
+    @Column(name = "is_deleted", columnDefinition = "boolean")
+    private int isDeleted;
     @ManyToMany(targetEntity = Applicant.class, cascade = CascadeType.ALL)
     @JoinTable(name = "applicant_recruiter",
                  joinColumns = { @JoinColumn(name = "recruiterId") },

@@ -22,8 +22,12 @@ public interface RecruiterService {
      * @param recruiter of type Recruiter.
      * @return recruiter.
      */
-    public Integer createRecruiter(RecruiterDTO recruiter) throws RecruitmentException;
+    public void createRecruiter(RecruiterDTO recruiter) throws RecruitmentException;
 
-    public List<RecruiterDTO> getRecruiters() throws RecruitmentException;
+    public RecruiterDTO viewRecruiter(int recruiterId) throws RecruitmentException;
+
+    public List<RecruiterDTO> viewRecruiters() throws RecruitmentException;
+
+    public void deleteRecruiter(int recruiterId) throws RecruitmentException;
 
 }
