@@ -31,12 +31,14 @@ import org.hibernate.annotations.ResultCheckStyle;
 import org.hibernate.annotations.SQLDelete;
 
 @Entity
-@SQLDelete(sql = "Update recruiter SET is_deleted = '1' where recruiterId=?", check = ResultCheckStyle.COUNT)
+@SQLDelete(sql = "Update recruiter SET is_deleted = '1' where recruiter_id=?", check = ResultCheckStyle.COUNT)
 public class Recruiter { 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int recruiterId;    
+	@Column(name = "recruiter_id")
+    private int recruiterId;   
+	
     private String name;  
     
     @Column(unique = true)
@@ -46,20 +48,12 @@ public class Recruiter {
     private String contactNumber;
     
     @Temporal(TemporalType.DATE)
-    //@DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
     
     @Enumerated(EnumType.STRING)
-    private Gender gender;  
+    private Gender gender; 
+    
     private int experience;
-
-    public int getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(int isDeleted) {
-        this.isDeleted = isDeleted;
-    }
 
     @ColumnDefault("0")
     @Column(name = "is_deleted", columnDefinition = "boolean")
@@ -218,6 +212,14 @@ public class Recruiter {
      */
     public void setRecruiterId(int recruiterId) {  
         this.recruiterId = recruiterId;  
+    }
+
+    public int getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public List<Applicant> getApplicants() {

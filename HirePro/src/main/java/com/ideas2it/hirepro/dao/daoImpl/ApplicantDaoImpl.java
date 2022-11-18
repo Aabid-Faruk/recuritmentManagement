@@ -1,8 +1,8 @@
 package com.ideas2it.hirepro.dao.daoImpl;
 
 import com.ideas2it.hirepro.customException.RecruitmentException;
-import com.ideas2it.hirepro.dao.RecruiterDao;
-import com.ideas2it.hirepro.model.Recruiter;
+import com.ideas2it.hirepro.dao.ApplicantDao;
+import com.ideas2it.hirepro.model.Applicant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 /**
- * Service class for Recruiter
+ * Service class for Applicant
  *
  * @author  Aabid Farooq
  * @version 18.0.2
@@ -27,31 +27,31 @@ import java.util.List;
  */
 @Component
 @Transactional
-public class RecruiterDaoImpl implements RecruiterDao {
+public class ApplicantDaoImpl implements ApplicantDao {
 
     @Autowired
     private HibernateTemplate hibernateTemplate;
     @PersistenceContext
     EntityManager entityManager;
     @Override
-    public void createRecruiter(Recruiter recruiter) throws RecruitmentException {
+    public void createApplicant(Applicant applicant) throws RecruitmentException {
         try {
-            this.hibernateTemplate.saveOrUpdate(recruiter);
+            this.hibernateTemplate.saveOrUpdate(applicant);
         } catch (Exception exception) {
             throw new RecruitmentException(exception.getMessage());
         }
     }
 
     @Override
-    public List<Recruiter> getRecruiters() throws RecruitmentException{
+    public List<Applicant> getApplicants() throws RecruitmentException{
         try {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-            CriteriaQuery<Recruiter> criteriaQuery = criteriaBuilder.createQuery(Recruiter.class);
-            Root<Recruiter> recruiter = criteriaQuery.from(Recruiter.class);
+            CriteriaQuery<Applicant> criteriaQuery = criteriaBuilder.createQuery(Applicant.class);
+            Root<Applicant> applicant = criteriaQuery.from(Applicant.class);
 
-            Predicate notDeleted = criteriaBuilder.equal(recruiter.get("isDeleted"),0);
+            Predicate notDeleted = criteriaBuilder.equal(applicant.get("isDeleted"),0);
             criteriaQuery.where(notDeleted);
-            TypedQuery<Recruiter> query = entityManager.createQuery(criteriaQuery);
+            TypedQuery<Applicant> query = entityManager.createQuery(criteriaQuery);
             return query.getResultList();
 
         } catch (Exception exception) {
@@ -60,25 +60,24 @@ public class RecruiterDaoImpl implements RecruiterDao {
     }
 
     @Override
-    public void deleteRecruiter(int recruiterId) throws RecruitmentException {
+    public void deleteApplicant(int applicantId) throws RecruitmentException {
         try{
-            Recruiter recruiter = this.hibernateTemplate.load(Recruiter.class, recruiterId);
-            this.hibernateTemplate.delete(recruiter);
+            Applicant applicant = this.hibernateTemplate.load(Applicant.class, applicantId);
+            this.hibernateTemplate.delete(applicant);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             throw new RecruitmentException(exception.getMessage());
         }
 
     }
-    
     @Override
-    public Recruiter getRecruiter(int recruiterId) throws RecruitmentException {
-        Recruiter recruiter;
+    public Applicant getApplicant(int applicantId) throws RecruitmentException {
+        Applicant applicant;
         try {
-            recruiter =  this.hibernateTemplate.get(Recruiter.class, recruiterId);
+            applicant =  this.hibernateTemplate.get(Applicant.class, applicantId);
         } catch (Exception exception) {
-            throw new RecruitmentException("Get Recruiter by Id not working");
+            throw new RecruitmentException("Get Applicant by Id not working");
         }
-        return recruiter;
+        return applicant;
     }
 }

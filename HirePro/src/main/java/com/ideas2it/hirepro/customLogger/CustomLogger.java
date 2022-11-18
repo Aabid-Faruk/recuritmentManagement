@@ -4,7 +4,6 @@ import java.lang.Throwable;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-import com.ideas2it.hirepro.constants.Constants;
 public class CustomLogger {
     private static Logger logger;
  
@@ -13,7 +12,6 @@ public class CustomLogger {
     }
         
     public static void info(String message) {
-        //logger.info(message);
         logger.info("apple");
     }
 

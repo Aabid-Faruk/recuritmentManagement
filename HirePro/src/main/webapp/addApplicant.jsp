@@ -68,31 +68,3 @@
     </div>
 </body>
 </html>
-<%--            <div style="display:block">all field are required</div>--%>
-<%--        </div>--%>
-
-<%--    </div>--%>
-<%--<script type="text/javascript">--%>
-
-<%--    function createRecruiter(event) {--%>
-<%--        event.preventDefault();--%>
-<%--        var validFlag = true;--%>
-<%--        var name = document.getElementById('name');--%>
-<%--        if(name.length == '' ) {--%>
-<%--            validFlag = flag;--%>
-<%--        }--%>
-<%--        alert('fddd');--%>
-
-<%--        if(validFlag == true) {--%>
-<%--            ajaxFunction();--%>
-<%--        } else {--%>
-<%--            document.getElementById('error').style = 'block';--%>
-<%--        }--%>
-<%--    }--%>
-
-<%--    function ajaxFunction(){--%>
-<%--        //ajax coding--%>
-<%--    }--%>
-
-
-<%--</script>--%>

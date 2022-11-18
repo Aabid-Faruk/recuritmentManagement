@@ -26,28 +26,45 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.ResultCheckStyle;
+import org.hibernate.annotations.SQLDelete;
+
 import com.ideas2it.hirepro.constants.Degree;
 import com.ideas2it.hirepro.constants.Gender;
 
 @Entity
+@SQLDelete(sql = "Update applicant SET is_deleted = '1' where applicant_id=?", check = ResultCheckStyle.COUNT)
 public class Applicant {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "applicant_id")
 	private int applicantId;
+	
     private String name; 
+    
     @Column(unique = true)
     private String email;
+    
     @Column(unique = true)
     private String contactNumber;
+    
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
+    
     @Enumerated(EnumType.STRING)
     private Gender gender; 
+    
     private int experience;  
+    
     @Enumerated(EnumType.STRING)
     private Degree degree; 
+    
+    @ColumnDefault("0")
+    @Column(name = "is_deleted", columnDefinition = "boolean")
+    private int isDeleted;
 
-    @ManyToMany(mappedBy = "applicants", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "applicants", cascade = CascadeType.ALL)
     private List<Recruiter> recruiters;
 
     /**
@@ -60,7 +77,7 @@ public class Applicant {
     /**
      * This is the parameterized constructor for Applicant.
      */
-/*    public Applicant(String name, 
+   public Applicant(String name, 
     		         String email, 
     		         String contactNumber, 
     		         Date dateOfBirth, 
@@ -75,7 +92,7 @@ public class Applicant {
         this.gender = gender;
         this.experience = experience;
         this.degree = degree;
-    }*/
+    }
 
     /**
      * This is the parameterized constructor for Applicant.
@@ -218,6 +235,14 @@ public class Applicant {
     public int getApplicantId() {  
         return applicantId;  
     }
+
+    public int getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(int isDeleted) {
+		this.isDeleted = isDeleted;
+	}
 
     public List<Recruiter> getRecruiters() {
         return recruiters;

@@ -41,6 +41,7 @@ public class RecruiterServiceImpl implements RecruiterService {
     }
     @Override
     public List<RecruiterDTO> viewRecruiters() throws RecruitmentException {
+    	System.out.println(recruiterDao.getRecruiters());
         return RecruiterDto.getRecruiterList(recruiterDao.getRecruiters());
     }
     @Override

@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
-<%@ page isELIgnored="false" %>
 <html>
 <head>
   <%@include file="base.jsp"%>
@@ -24,7 +23,6 @@
     <h1 class="text-center mb-3">Change Recruiter details</h1>
 
     <form action="${pageContext.request.contextPath}/handle-Recruiter"  method="post">
-
       <div class="form-group">
         <input type="number"
                class="form-control"
