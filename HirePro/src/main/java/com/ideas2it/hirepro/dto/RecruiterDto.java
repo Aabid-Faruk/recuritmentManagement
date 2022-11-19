@@ -22,7 +22,7 @@ public class RecruiterDto {
 	}
 	
 	public static RecruiterDTO getRecruiterDTO(Recruiter recruiter) {
-		RecruiterDTO recruiterDto = null;
+		RecruiterDTO recruiterDto = new RecruiterDTO();
 		
 		if (null != recruiter) {
 			recruiterDto = new RecruiterDTO();

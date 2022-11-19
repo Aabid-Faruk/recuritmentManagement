@@ -3,7 +3,6 @@ package com.ideas2it.hirepro.service;
 import java.util.List;
 
 import com.ideas2it.hirepro.customException.RecruitmentException;
-import com.ideas2it.hirepro.model.Recruiter;
 import com.ideas2it.hirepro.model.RecruiterDTO;
 
 /**
@@ -29,5 +28,7 @@ public interface RecruiterService {
     public List<RecruiterDTO> viewRecruiters() throws RecruitmentException;
 
     public void deleteRecruiter(int recruiterId) throws RecruitmentException;
+    
+    public void assignApplicants(int recruiterId, List<String> recruiterIds) throws RecruitmentException;
 
 }

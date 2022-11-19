@@ -8,14 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
-<%@ page isELIgnored="false" %>
+<!DOCTYPE html>
 <html>
 <head>
-  <%@include file="base.jsp"%>
   <title><c:out value="${title}">Update</c:out> </title>
 
 </head>
 <body>
+	<jsp:include page="normal_navbar.jsp"></jsp:include>
 
 <div class="container mt-3">
 
@@ -23,8 +23,7 @@
 
     <h1 class="text-center mb-3">Change Recruiter details</h1>
 
-    <form action="${pageContext.request.contextPath}/handle-Recruiter"  method="post">
-
+    <form action="${pageContext.request.contextPath}/handleRecruiter"  method="post">
       <div class="form-group">
         <input type="number"
                class="form-control"
@@ -67,22 +66,18 @@
                        type="radio"
                        value="MALE"
                         checked="checked">Male
-                </input>
                 <input name="tempGender"
                        type="radio"
                        value="FEMALE">Female
-                </input>
         </c:if>
         <c:if test="${recruiter.gender eq 'FEMALE'}">
           Gender: <input name="tempGender"
                          type="radio"
                          value="MALE">Male
-          </input>
           <input name="tempGender"
                  type="radio"
                  value="FEMALE"
                  checked="checked">Female
-          </input>
         </c:if>
       </div>
       <div class="form-group">
@@ -93,7 +88,7 @@
                class="form-control">
       </div>
       <div class="container text-center">
-        <a href="${pageContext.request.contextPath}/"
+        <a href="${pageContext.request.contextPath}/recruiter"
            class="btn btn-outline-danger">Back</a>
         <button type="submit" class="btn btn-warning">update</button>
       </div>

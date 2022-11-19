@@ -12,33 +12,35 @@
 
         <div class="col-md-6 offset-md-3">
 
-            <h1 class="text-center mb-3">Fill the Recruiter details</h1>
+            <h1 class="text-center mb-3">Fill the Applicant details</h1>
 
-            <form action="handleRecruiter"  method="post">
+            <form action="handleApplicant"  method="post">
 
                 <div class="form-group">
+                	<label for="Name">Applicant Name</label>
                     <input type="text"
                            class="form-control"
                            name="name"
-                           placeholder="Enter the Recruiter name here">
+                           id="name"
+                           placeholder="Enter the Applicant name here">
                 </div>
                 <div class="form-group">
                     <input type="email"
                            class="form-control"
                            name="email"
-                           placeholder="Enter the Recruiter email here">
+                           placeholder="Enter the Applicant email here">
                 </div>
                 <div class="form-group">
                     <input type="text"
                            class="form-control"
                            name="contactNumber"
-                           placeholder="Enter the Recruiter contactNumber here">
+                           placeholder="Enter the Applicant contactNumber here">
                 </div>
                 <div class="form-group">
                     <input type="date"
                            class="form-control"
                            name="tempDob"
-                           placeholder="Enter the Recruiter contactNumber here">
+                           placeholder="Enter the Applicant contactNumber here">
                 </div>
 
                 <div class="form-group">
@@ -50,6 +52,18 @@
                                        type="radio"
                                        value="FEMALE">Female
                 </div>
+
+                <div class="form-group">
+
+                        Degree: <select name="tempDegree" >
+                        			<option value="BTECH">B-Tech</option>
+                        			<option value="MTECH">M-Tech</option>
+                        			<option value="BCA">BCA</option>
+                        			<option value="MCA">MCA</option>
+                        			<option value="BSC">BSc</option>
+                        			<option value="MSC">MSc</option>
+                                </select>
+                </div>
                 <div class="form-group">
                     <input name="experience"
                            type="number"
@@ -57,7 +71,7 @@
                            class="form-control">
                 </div>
                 <div class="container text-center">
-                    <a href="${pageContext.request.contextPath}/recruiter"
+                    <a href="${pageContext.request.contextPath}/applicant"
                        class="btn btn-outline-danger">Back</a>
                     <button type="submit" class="btn btn-primary">Add</button>
                 </div>
@@ -66,31 +80,3 @@
     </div>
 </body>
 </html>
-<%--            <div style="display:block">all field are required</div>--%>
-<%--        </div>--%>
-
-<%--    </div>--%>
-<%--<script type="text/javascript">--%>
-
-<%--    function createRecruiter(event) {--%>
-<%--        event.preventDefault();--%>
-<%--        var validFlag = true;--%>
-<%--        var name = document.getElementById('name');--%>
-<%--        if(name.length == '' ) {--%>
-<%--            validFlag = flag;--%>
-<%--        }--%>
-<%--        alert('fddd');--%>
-
-<%--        if(validFlag == true) {--%>
-<%--            ajaxFunction();--%>
-<%--        } else {--%>
-<%--            document.getElementById('error').style = 'block';--%>
-<%--        }--%>
-<%--    }--%>
-
-<%--    function ajaxFunction(){--%>
-<%--        //ajax coding--%>
-<%--    }--%>
-
-
-<%--</script>--%>

@@ -31,8 +31,10 @@ public class RecruiterDaoImpl implements RecruiterDao {
 
     @Autowired
     private HibernateTemplate hibernateTemplate;
+    
     @PersistenceContext
     EntityManager entityManager;
+    
     @Override
     public void createRecruiter(Recruiter recruiter) throws RecruitmentException {
         try {
@@ -46,7 +48,7 @@ public class RecruiterDaoImpl implements RecruiterDao {
     public List<Recruiter> getRecruiters() throws RecruitmentException{
         try {
             CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-            CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(Recruiter.class);
+            CriteriaQuery<Recruiter> criteriaQuery = criteriaBuilder.createQuery(Recruiter.class);
             Root<Recruiter> recruiter = criteriaQuery.from(Recruiter.class);
 
             Predicate notDeleted = criteriaBuilder.equal(recruiter.get("isDeleted"),0);
@@ -70,13 +72,14 @@ public class RecruiterDaoImpl implements RecruiterDao {
         }
 
     }
+    
     @Override
     public Recruiter getRecruiter(int recruiterId) throws RecruitmentException {
         Recruiter recruiter;
         try {
             recruiter =  this.hibernateTemplate.get(Recruiter.class, recruiterId);
         } catch (Exception exception) {
-            throw new RecruitmentException("Get Recruiter by Id not working");
+            throw new RecruitmentException(exception.getMessage());
         }
         return recruiter;
     }
