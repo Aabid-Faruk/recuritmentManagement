@@ -12,7 +12,7 @@ public class CustomLogger {
     }
         
     public static void info(String message) {
-        logger.info("apple");
+        logger.info(message);
     }
 
     public static void trace(String message) {
