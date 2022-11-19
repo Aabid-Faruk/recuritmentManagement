@@ -27,4 +27,6 @@ public interface ApplicantDao {
     List<Applicant> getApplicants() throws RecruitmentException;
 
     void deleteApplicant(int applicantId) throws RecruitmentException;
+
+	List<Applicant> getApplicantsByIds(List<String> applicantIds);
 }

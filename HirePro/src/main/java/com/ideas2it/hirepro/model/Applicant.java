@@ -55,10 +55,10 @@ public class Applicant {
     @Enumerated(EnumType.STRING)
     private Gender gender; 
     
-    private int experience;  
-    
     @Enumerated(EnumType.STRING)
     private Degree degree; 
+    
+    private int experience;  
     
     @ColumnDefault("0")
     @Column(name = "is_deleted", columnDefinition = "boolean")

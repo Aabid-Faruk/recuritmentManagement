@@ -1,15 +1,15 @@
 package com.ideas2it.hirepro.service.serviceImpl;
-import com.ideas2it.hirepro.customException.RecruitmentException;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ideas2it.hirepro.customException.RecruitmentException;
 import com.ideas2it.hirepro.dao.ApplicantDao;
 import com.ideas2it.hirepro.dto.ApplicantDto;
 import com.ideas2it.hirepro.model.Applicant;
 import com.ideas2it.hirepro.model.ApplicantDTO;
 import com.ideas2it.hirepro.service.ApplicantService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Service class for Applicant
@@ -31,7 +31,6 @@ public class ApplicantServiceImpl implements ApplicantService {
      */
     @Override
     public void createApplicant(ApplicantDTO data) throws RecruitmentException {
-        //Applicant applicant = ApplicantDto.getApplicantDao(data);
         applicantDao.createApplicant(ApplicantDto.getApplicantDao(data));
     }
 
@@ -47,4 +46,10 @@ public class ApplicantServiceImpl implements ApplicantService {
     public void deleteApplicant(int applicantId) throws RecruitmentException {
         applicantDao.deleteApplicant(applicantId);
     }
+
+	@Override
+	public List<Applicant> getApplicantsByIds(List<String> applicantIds) {
+		
+		return applicantDao.getApplicantsByIds(applicantIds);
+	}
 }

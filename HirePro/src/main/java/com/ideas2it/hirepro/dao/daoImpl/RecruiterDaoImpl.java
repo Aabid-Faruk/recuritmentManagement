@@ -31,8 +31,10 @@ public class RecruiterDaoImpl implements RecruiterDao {
 
     @Autowired
     private HibernateTemplate hibernateTemplate;
+    
     @PersistenceContext
     EntityManager entityManager;
+    
     @Override
     public void createRecruiter(Recruiter recruiter) throws RecruitmentException {
         try {
@@ -77,7 +79,7 @@ public class RecruiterDaoImpl implements RecruiterDao {
         try {
             recruiter =  this.hibernateTemplate.get(Recruiter.class, recruiterId);
         } catch (Exception exception) {
-            throw new RecruitmentException("Get Recruiter by Id not working");
+            throw new RecruitmentException(exception.getMessage());
         }
         return recruiter;
     }

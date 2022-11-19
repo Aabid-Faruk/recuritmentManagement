@@ -9,21 +9,45 @@
 <title><c:out value="${title}"/></title>
 </head>
 <body >
-<jsp:include page="index.jsp"/>
+<jsp:include page="normal_navbar.jsp"/>
 	<div class="container">
 	<br>
-	${recruiter}
-	<form action="assignApplicants" method="post">
-			<table class="table bg-info">
+<%-- 	${recruiter} --%>
+
+			<table class="table table-striped">
+				<tr class="bg-info">
+					<td>ID</td>
+					<td>Name</td>
+					<td>Email</td>
+					<td>Contact</td>
+					<td>Gender</td>
+					<td>Experience</td>
+					<td>DOB</td>
+				</tr>
+
 				<tr>
-					<td>Applicant ID</td>
-					<td>Name of Applicant</td>
-					<td>Applicant Email</td>
-					<td>Applicant Contact</td>
-					<td>Applicant Degree</td>
-					<td>Applicant Gender</td>
-					<td>Applicant Experience</td>
-					<td>Applicant DOB</td>
+					<td>${recruiter.recruiterId}</td>
+					<td>${recruiter.name }</td>
+					<td>${recruiter.email}</td>
+					<td>${recruiter.contactNumber}</td>
+					<td>${recruiter.gender}</td>
+					<td>${recruiter.experience}</td>
+					<td>${recruiter.dateOfBirth}</td>
+				</tr>
+			</table>		
+	<hr class="bg-success">
+	<br>
+	<form action="${pageContext.request.contextPath}/assignApplicants" method="post">
+			<table class="table table-striped">
+				<tr class="bg-warning">
+					<td>ID</td>
+					<td>Name</td>
+					<td>Email</td>
+					<td>Contact</td>
+					<td>Degree</td>
+					<td>Gender</td>
+					<td>Experience</td>
+					<td>DOB</td>
 				</tr>
 				<c:forEach items="${applicants}" var="applicant">
 
@@ -39,8 +63,7 @@
 				</tr>
 				</c:forEach>
 			</table>
-		<input type="text" name="recruiter_Id" placeholder="recruiter ID"> 
-		<input type="hidden" name="source" value="AssignApplicants">			
+		<input type="hidden" name="recruiterId" value="${recruiter.recruiterId}">
 		<input type="submit" name="submit" value="Assign Selected">
 		</form>
 	</div>

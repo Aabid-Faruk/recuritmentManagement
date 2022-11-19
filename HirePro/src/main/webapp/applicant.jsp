@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><c:out value="${title}">Recruiter</c:out> </title>
+    <title><c:out value="${title}">Applicant</c:out> </title>
 </head>
 <body>
-    <%@include file="myfile.jsp"%>
+	<jsp:include page="normal_navbar.jsp"/>
 
     <div class="container mt-3">
 
@@ -15,7 +15,7 @@
 
             <div class="col-md-12">
 
-                <h1 class="text-center mb-3">Welcome to Recruitment App</h1>
+                <h1 class="text-center mb-3">Applicant Menu</h1>
 
                 <table class="table">
                     <thead class="thead-dark">
@@ -26,33 +26,36 @@
                         <th scope="col">Contact Number</th>
                         <th scope="col">Date of Birth</th>
                         <th scope="col">Gender</th>
+                        <th scope="col">Degree</th>
                         <th scope="col">Experience</th>
                         <th colspan="2" scope="col">Action</th>
 
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${recruiters}" var="recruiter">
+                    <c:forEach items="${applicants}" var="applicant">
                     <tr>
                         <th scope="row">${recruiter.recruiterId}</th>
-                        <td>${recruiter.name}</td>
-                        <td>${recruiter.email}</td>
-                        <td>${recruiter.contactNumber}</td>
-                        <td>${recruiter.dateOfBirth}</td>
-                        <td>${recruiter.gender}</td>
-                        <td>${recruiter.experience}</td>
+                        <td>${applicant.name}</td>
+                        <td>${applicant.email}</td>
+                        <td>${applicant.contactNumber}</td>
+                        <td>${applicant.dateOfBirth}</td>
+                        <td>${applicant.gender}</td>
+                        <td>${applicant.degree}</td>
+                        <td>${applicant.experience}</td>
                         <td>
-                            <a href="updateRecruiter/${recruiter.recruiterId}"><span class="glyphicon glyphicon-edit"></span></a>
+                            <a href="updateApplicant/${applicant.applicantId}"><i class="bi bi-pen-fill"></i></a>
                         </td>
                         <td>
-                            <a href="deleteRecruiter/${recruiter.recruiterId}"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a href="deleteApplicant/${applicant.applicantId}"><i class="bi bi-trash-fill"></i></a>
                         </td>
                     </tr>
                     </c:forEach>
                     </tbody>
                 </table>
                 <div class="container text-center">
-                    <a href="addRecruiter"><button class="btn btn-success">Add Product</button></a>
+                    <a href="${pageContext.request.contextPath}/"><button class="btn btn-warning">Home</button></a>
+                    <a href="showAddApplicantPage"><button class="btn btn-success">Add New Applicant</button></a>
 
                 </div>
             </div>

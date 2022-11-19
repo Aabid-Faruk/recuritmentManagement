@@ -7,7 +7,8 @@
     <title><c:out value="${title}">Recruiter</c:out> </title>
 </head>
 <body>
-    <%@include file="myfile.jsp"%>
+	<jsp:include page="normal_navbar.jsp"></jsp:include>
+    
 
     <div class="container mt-3">
 
@@ -15,7 +16,7 @@
 
             <div class="col-md-12">
 
-                <h1 class="text-center mb-3">Welcome to Recruitment App</h1>
+                <h1 class="text-center mb-3">Recruiter Menu</h1>
 
                 <table class="table">
                     <thead class="thead-dark">
@@ -42,20 +43,21 @@
                         <td>${recruiter.gender}</td>
                         <td>${recruiter.experience}</td>
                         <td>
-                            <a href="updateRecruiter/${recruiter.recruiterId}"><span class="glyphicon glyphicon-edit"></span></a>
+                            <a href="showUpdatePage/${recruiter.recruiterId}"><i class="bi bi-pen-fill"></i></a>
                         </td>
                         <td>
-                            <a href="deleteRecruiter/${recruiter.recruiterId}"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a href="deleteRecruiter/${recruiter.recruiterId}"><i class="bi bi-trash-fill"></i></a>
                         </td>
                         <td>
-                            <a href="assignApplicants/${recruiter.recruiterId}"><span class="glyphicon glyphicon-plus"></span></a>
+                            <a href="showAssignPage/${recruiter.recruiterId}"><i class="bi bi-list-stars"></i></a>
                         </td>
                     </tr>
                     </c:forEach>
                     </tbody>
                 </table>
                 <div class="container text-center">
-                    <a href="addRecruiter"><button class="btn btn-success">Add Product</button></a>
+                    <a href="${pageContext.request.contextPath}/"><button class="btn btn-warning">Home</button></a>
+                    <a href="showAddRecruiterPage"><button class="btn btn-success">Add New Recruiter</button></a>
 
                 </div>
             </div>

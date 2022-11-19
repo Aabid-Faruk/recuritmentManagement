@@ -31,8 +31,10 @@ public class ApplicantDaoImpl implements ApplicantDao {
 
     @Autowired
     private HibernateTemplate hibernateTemplate;
+    
     @PersistenceContext
     EntityManager entityManager;
+    
     @Override
     public void createApplicant(Applicant applicant) throws RecruitmentException {
         try {
@@ -76,8 +78,21 @@ public class ApplicantDaoImpl implements ApplicantDao {
         try {
             applicant =  this.hibernateTemplate.get(Applicant.class, applicantId);
         } catch (Exception exception) {
-            throw new RecruitmentException("Get Applicant by Id not working");
+            throw new RecruitmentException(exception.getMessage());
         }
         return applicant;
     }
+
+	@Override
+	public List<Applicant> getApplicantsByIds(List<String> applicantIds) {
+
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Applicant> criteriaQuery = criteriaBuilder.createQuery(Applicant.class);
+        Root<Applicant> applicant = criteriaQuery.from(Applicant.class);
+
+        //Predicate notDeleted = criteriaBuilder.equal(applicant.get("isDeleted"),0);
+        criteriaQuery.select(applicant).where(applicant.get("applicantId").in(applicantIds));
+        TypedQuery<Applicant> query = entityManager.createQuery(criteriaQuery);
+        return query.getResultList();
+	}
 }

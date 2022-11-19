@@ -30,4 +30,6 @@ public interface ApplicantService {
 
     public void deleteApplicant(int applicantId) throws RecruitmentException;
 
+	public List<Applicant> getApplicantsByIds(List<String> applicantIds);
+
 }

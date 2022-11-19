@@ -1,15 +1,16 @@
 package com.ideas2it.hirepro.service.serviceImpl;
-import com.ideas2it.hirepro.customException.RecruitmentException;
+import java.util.List;
 
-import com.ideas2it.hirepro.dao.RecruiterDao;
-import com.ideas2it.hirepro.dto.RecruiterDto;
-//import com.ideas2it.hirepro.model.Recruiter;
-import com.ideas2it.hirepro.model.RecruiterDTO;
-import com.ideas2it.hirepro.service.RecruiterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.ideas2it.hirepro.customException.RecruitmentException;
+import com.ideas2it.hirepro.dao.RecruiterDao;
+import com.ideas2it.hirepro.dto.RecruiterDto;
+import com.ideas2it.hirepro.model.Applicant;
+import com.ideas2it.hirepro.model.RecruiterDTO;
+import com.ideas2it.hirepro.service.ApplicantService;
+import com.ideas2it.hirepro.service.RecruiterService;
 
 /**
  * Service class for Recruiter
@@ -23,6 +24,9 @@ public class RecruiterServiceImpl implements RecruiterService {
     @Autowired
     private RecruiterDao recruiterDao;
     
+    @Autowired
+    private ApplicantService applicantService;
+    
     /**
      * Create a Recruiter.
      *
@@ -31,7 +35,6 @@ public class RecruiterServiceImpl implements RecruiterService {
      */
     @Override
     public void createRecruiter(RecruiterDTO data) throws RecruitmentException {
-        //Recruiter recruiter = RecruiterDto.getRecruiterDao(data);
         recruiterDao.createRecruiter(RecruiterDto.getRecruiterDao(data));
     }
 
@@ -41,11 +44,20 @@ public class RecruiterServiceImpl implements RecruiterService {
     }
     @Override
     public List<RecruiterDTO> viewRecruiters() throws RecruitmentException {
-    	System.out.println(recruiterDao.getRecruiters());
         return RecruiterDto.getRecruiterList(recruiterDao.getRecruiters());
     }
     @Override
     public void deleteRecruiter(int recruiterId) throws RecruitmentException {
         recruiterDao.deleteRecruiter(recruiterId);
     }
+
+	@Override
+	public void assignApplicants(int recruiterId, List<String> recruiterIds) throws RecruitmentException {
+		RecruiterDTO recruiter = this.viewRecruiter(recruiterId);	
+		List<Applicant> applicants = applicantService.getApplicantsByIds(recruiterIds);
+		if(!applicants.isEmpty()) {
+			recruiter.setApplicants(applicants);
+			this.createRecruiter(recruiter);
+		}
+	}
 }

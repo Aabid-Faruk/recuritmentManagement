@@ -14,7 +14,7 @@
 
             <h1 class="text-center mb-3">Fill the Recruiter details</h1>
 
-            <form action="handle-Recruiter"  method="post">
+            <form action="handleRecruiter"  method="post">
 
                 <div class="form-group">
                     <input type="text"
@@ -46,11 +46,9 @@
                         Gender: <input name="tempGender"
                                        type="radio"
                                        value="MALE">Male
-                                </input>
                                 <input name="tempGender"
                                        type="radio"
                                        value="FEMALE">Female
-                                </input>
                 </div>
                 <div class="form-group">
                     <input name="experience"
@@ -59,7 +57,7 @@
                            class="form-control">
                 </div>
                 <div class="container text-center">
-                    <a href="${pageContext.request.contextPath}/"
+                    <a href="${pageContext.request.contextPath}/recruiter"
                        class="btn btn-outline-danger">Back</a>
                     <button type="submit" class="btn btn-primary">Add</button>
                 </div>
